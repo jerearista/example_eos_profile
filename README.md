@@ -8,7 +8,7 @@ This example shows the implementation of an InSpec
 This profile is typically run remotely via SSH to an Arista EOS device:
 ```
 git clone https://github.com/jerearista/example_eos_profile.git
-cd example_eos_profileeos_profile
+cd example_eos_profile
 bundle exec inspec exec example_eos_profile -t ssh://admin:admin@<switch_IP_address>
 ```
 
