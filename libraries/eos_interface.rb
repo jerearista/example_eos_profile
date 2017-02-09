@@ -86,8 +86,9 @@ class EosInterface < Inspec.resource(1)
     ].join('/')
   end
 
-  def secondary_ip
-    @params['interfaceAddress'][0]['secondaryIpsOrderedList']
+  def secondary_ip_addresses
+    @params['interfaceAddress'][0]['secondaryIps']
+      .map { |ip, attrs| "#{ip}/#{attrs['maskLen']}" }
   end
 
   def linkStatusChanges

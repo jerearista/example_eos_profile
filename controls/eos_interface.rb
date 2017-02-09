@@ -34,6 +34,7 @@ title 'sample checks for EOS interfaces'
 # before do
 #  skip if node["normal"]["foo"] == "bar"
 # end
+require 'rspec/collection_matchers'
 
 describe eos_interface('Management1') do
   it { should exist }
@@ -42,6 +43,8 @@ describe eos_interface('Management1') do
   its('link') { should eq('connected') }
   its('protocol') { should eq('up') }
   its('ip_address') { should eq('10.0.2.15/24') }
+  its('secondary_ip_addresses') { should have(1).entry }
+  its('secondary_ip_addresses') { should match_array(['192.168.1.1/24']) }
   its('linkStatusChanges') { should eq(52) }
   its('mode') { should eq('routed') }
   its('description') { should include('vagrant') }
