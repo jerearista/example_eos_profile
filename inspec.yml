@@ -1,0 +1,10 @@
+name: eos_example
+title: Example InSpec Profile for Arista EOS
+maintainer: Jere Julian <jere@arista.com>
+copyright: 2017 Arista Networks
+copyright_email: eosplus-dev@arista.com
+license: BSD 3-clause, All Rights Reserved
+summary: A  sample InSpec Compliance Profile for testing
+version: 0.1.0
+supports:
+  - os-family: arista_eos
