@@ -39,6 +39,13 @@ describe eos_interface('Management1') do
   it { should exist }
   its('interfaceStatus') { should eq('connected') }
   its('lineProtocolStatus') { should eq('up') }
+  its('link') { should eq('connected') }
+  its('protocol') { should eq('up') }
+  its('ip_address') { should eq('10.0.2.15/24') }
+  its('linkStatusChanges') { should eq(52) }
+  its('mode') { should eq('routed') }
+  its('description') { should include('vagrant') }
+  its('description') { should_not include('esx') }
 end
 
 describe eos_interface('Ethernet8') do

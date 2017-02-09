@@ -34,8 +34,12 @@ class EosInterface < Inspec.resource(1)
   example "
     describe eos_interface('Management1') do
       it { should exist }
-      its('status') { should eq('connected')}
-      its('lineProtolStatus') { should eq('up')}
+      its('link') { should eq('connected') }
+      its('protocol') { should eq('up') }
+      its('ip_address') { should eq('10.0.2.15/24') }
+      its('linkStatusChanges') { should eq(52) }
+      its('mode') { should eq('routed') }
+      its('description') { should include('management') }
     end
   "
 
@@ -62,7 +66,44 @@ class EosInterface < Inspec.resource(1)
     response['interfaceStatuses'].key?(@interface)
   end
 
+  def link
+    @params['interfaceStatus']
+  end
+
+  def protocol
+    @params['lineProtocolStatus']
+  end
+
+  def ip_address
+    [@params['interfaceAddress'][0]['primaryIp']['address'],
+     @params['interfaceAddress'][0]['primaryIp']['maskLen'].to_s
+    ].join('/')
+  end
+
+  def virtual_ip_address
+    [@params['interfaceAddress'][0]['virtualIp']['address'],
+     @params['interfaceAddress'][0]['virtualIp']['maskLen'].to_s
+    ].join('/')
+  end
+
+  def secondary_ip
+    @params['interfaceAddress'][0]['secondaryIpsOrderedList']
+  end
+
+  def linkStatusChanges
+    @params['interfaceCounters']['linkStatusChanges']
+  end
+
+  def mode
+    # 'bridged' or 'routed'
+    @params['forwardingModel']
+  end
+
   def method_missing(name)
     @params[name.to_s]
+  end
+
+  def to_s
+    "eos_interface #{@interface}"
   end
 end
