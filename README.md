@@ -9,12 +9,12 @@ This profile is typically run remotely via SSH to an Arista EOS device:
 ```
 git clone https://github.com/jerearista/example_eos_profile.git
 cd example_eos_profile
-bundle exec inspec exec example_eos_profile -t ssh://admin:admin@<switch_IP_address>
+bundle exec inspec exec example_eos_profile -t ssh://<username>:<password>@<switch_IP_address>
 ```
 
 Or, run it directly from GitHub:
 ```
-bundle exec inspec exec https://github.com/jerearista/example_eos_profile -t ssh://admin:admin@<switch_IP_address>
+bundle exec inspec exec https://github.com/jerearista/example_eos_profile -t ssh://<username>:<password>@<switch_IP_address>
 ```
 
 If you do not have InSpec installed system-wide then use bundler:
@@ -22,7 +22,7 @@ If you do not have InSpec installed system-wide then use bundler:
 git clone https://github.com/jerearista/example_eos_profile.git
 cd example_eos_profile
 bundle install --path=.bundle/gems
-bundle exec inspec exec . -t ssh://admin:admin@<switch_IP_address>
+bundle exec inspec exec . -t ssh://<username>:<password>@<switch_IP_address>
 ```
 
 ## License and Author
