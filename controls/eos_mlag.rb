@@ -53,8 +53,8 @@ end
 describe eos_mlag_member('733') do
   it { should exist }
   its('localInterface') { should eq('Port-Channel733')}
-  its('members') { should have(0).entres }
   its('local_interface_status') { should eq('down') }
   its('lacp_mode') { should eq('active') }
-  its('configured_members') { should have(1).entres }
+  its('members') { should have(0).entries }
+  its('configured_members') { should have(1).entries }
 end
