@@ -29,17 +29,16 @@
 class EosMlagMember < Inspec.resource(1)
   name 'eos_mlag_member'
 
-  desc 'Arista EOS Multiple Link Aggregation (MLAG)'
+  desc 'Arista EOS Multiple Link Aggregation (MLAG) members'
 
   example "
-    describe eos_interface('Management1') do
+    describe eos_mlag_member('733') do
       it { should exist }
-      its('link') { should eq('connected') }
-      its('protocol') { should eq('up') }
-      its('ip_address') { should eq('10.0.2.15/24') }
-      its('linkStatusChanges') { should eq(52) }
-      its('mode') { should eq('routed') }
-      its('description') { should include('management') }
+      its('localInterface') { should eq('Port-Channel733')}
+      its('local_interface_status') { should eq('down') }
+      its('lacp_mode') { should eq('active') }
+      its('members') { should have(0).entries }
+      its('configured_members') { should have(1).entries }
     end
   "
 

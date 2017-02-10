@@ -29,17 +29,19 @@
 class EosMlag < Inspec.resource(1)
   name 'eos_mlag'
 
-  desc 'Arista EOS Multiple Link Aggregation (MLAG)'
+  desc 'Arista EOS Multiple Link Aggregation (MLAG) domain status'
 
   example "
-    describe eos_interface('Management1') do
+    describe eos_mlag do
       it { should exist }
-      its('link') { should eq('connected') }
-      its('protocol') { should eq('up') }
-      its('ip_address') { should eq('10.0.2.15/24') }
-      its('linkStatusChanges') { should eq(52) }
-      its('mode') { should eq('routed') }
-      its('description') { should include('management') }
+      its('state') { should eq('active') }
+      its('domainId') { should eq('cboe') }
+      its('localInterface') { should eq('Vlan4094') }
+      its('localIntfStatus') { should eq('up') }
+      its('peerAddress') { should eq('10.0.0.2') }
+      its('peerLink') { should eq('Port-Channel1000') }
+      its('peerLinkStatus') { should eq('up') }
+      its('peer_link_members') { should have(2).entres }
     end
   "
 
